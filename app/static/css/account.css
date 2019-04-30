@@ -1,0 +1,19 @@
+body{
+  background-color: aliceblue;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  .navbar{
+    border-radius:0px;
+  }
+  

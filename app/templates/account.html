@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/account.css')}}">
+
+{%endblock%}
+
+{% block content %}
+    <div class="content-section container">
+        <div class="row">
+            <div class="col-sm-8">
+                     <!--Flash message -->
+      {% for message in get_flashed_messages() %}
+      <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+      </div>
+    {% endfor %}
+
+      <div class="media" >
+        <img class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ current_user.username }}</h2>
+          <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="update-form-section ">
+
+            {{wtf.quick_form(form)}} 
+        
+
+      </div>
+      </div>
+      <div class="col-sm-4"></div>
+      </div>
+    </div>
+{% endblock content %}
