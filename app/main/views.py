@@ -9,6 +9,7 @@ from ..models import User, Post
 from .. import db, photos
 from flask_login import login_required, current_user
 from .forms import UpdateAccountForm, PostForm
+from ..requests import get_quote
 
 
 @main.route('/')
@@ -18,7 +19,10 @@ def index():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(
         page=page, per_page=5)  # this sets the max number of posts per page to 5
-
+    quote_object = get_quote()
+    # author= quote_object["author"]
+    quote = quote_object["quote"]
+    print(quote)
     # posts=Post.query.all()  #this fetches all the posts  use pagination to limit the number of posts per page for neatness and curiosity
     title = "devgarage"
     return render_template("index.html", title=title, posts=posts)

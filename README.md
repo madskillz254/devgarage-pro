@@ -3,6 +3,10 @@
 Devgarage is a blog website that allows the users to post various blogs about various topics with no restrictions or limitations .
 
 ## Getting Started
+**[View Code Preview](https://github.com/madskillz254/devgarage)**
+
+## to contribute
+fork this repository
 
 clone this repository
 
@@ -57,14 +61,13 @@ git commit -m"initial deployment to heroku"
 
 in config.py add:
 
-class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") 
------
+class ProdConfig(Config): SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") 
+
 adding required info to heroku
 ```(virtual)$ heroku config:set MAIL_USERNAME=<YOUR EMAIL ADDRESS>```
 ```(virtual)$ heroku config:set MAIL_PASSWORD=<YOUR EMAIL PASSWORD> ```
 ``` heroku addons:create heroku-postgresql --(name of database)  ``` to create a postgresql db on heroku
-------
+
 git push heroku master
 ``` heroku run python3.6 manage.py db upgrade ``` to create a schema on heroku
 
@@ -73,6 +76,7 @@ git push heroku master
 ## Built With
 
 * [Flask 1.0.2](http://flask.pocoo.org/) - The web framework used 
+* [postgresql database](https://www.postgresql.org/) - The database created by postgress 
 
 
 ## Contributing
