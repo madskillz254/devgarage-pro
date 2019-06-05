@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField,PasswordField,BooleanField,SubmitField ,TextAreaField 
-from wtforms.validators import Required,Email,EqualTo  
+from wtforms.validators import Required,Email,EqualTo 
 from ..models import User,Post
 from wtforms import ValidationError
 
@@ -34,3 +34,21 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[Required()])
     content = TextAreaField('Content', validators=[Required()])
     submit = SubmitField('Post')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email',
+                        validators=[Required(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('There is no account with that email. You must register first.')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[Required()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[Required(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
